@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Inbox, Loader2 } from "lucide-react";
 import React from "react";
 import { useDropzone } from "react-dropzone";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -13,9 +13,6 @@ type UploadData = {
   file_name: string;
 };
 
-type ApiErrorResponse = {
-  error?: string;
-};
 
 const FileUpload = () => {
   const router = useRouter();
