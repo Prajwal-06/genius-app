@@ -1,6 +1,5 @@
 import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_API_KEY!);

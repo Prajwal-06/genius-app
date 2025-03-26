@@ -15,7 +15,6 @@ const FileUpload = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: async (uploadData: { file_key: string; file_name: string }) => {
       const response = await axios.post("/api/create-chat", uploadData);
-      console.log("----------------------------------")
       return response.data;
     },
     onSuccess: (data) => {

@@ -229,7 +229,7 @@
 import ChatLoader from "@/components/ChatLoader";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChatSideBar from "@/components/chat/ChatSideBar";
 import ChatComponent from "@/components/chat/ChatComponent";
 import PDFViewer from "@/components/chat/PDFViewer";
@@ -246,12 +246,9 @@ export default function ConversationPage({
 }: {
   params: { chatId: string };
 }) {
-  const id = params.chatId; // ✅ Extract chatId from params first
+  
 
-  
-  
   const { user } = useUser();
-  const router = useRouter();
   const [pdfUrl, setPdfUrl] = useState("");
 
 
@@ -269,7 +266,7 @@ export default function ConversationPage({
     },
   });
 
-  const { data: chat, isLoading: chatLoading } = useQuery({
+  const { isLoading: chatLoading } = useQuery({
     queryKey: ["chat", params.chatId],
     queryFn: async () => {
       

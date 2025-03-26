@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { MessageCircle, PlusCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DrizzleChat } from "@/lib/db/schema";
-import MobileSidebarDoctutor from "../MobileSidebarDoctutor";
+
 
 type Props = {
   chats: DrizzleChat[];
@@ -12,7 +12,7 @@ type Props = {
   isPro: boolean;
 };
 
-export default function ChatSideBar({ chats, chatId, isPro }: Props) {
+export default function ChatSideBar({ chats, chatId}: Props) {
   console.log("chat id in chat sidebar",chatId)
 
 

@@ -153,7 +153,6 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/Loader";
-import Dropdown from "react-bootstrap/Dropdown";
 import ReactMarkdown from "react-markdown";
 
 interface Message {
@@ -161,9 +160,6 @@ interface Message {
   content: string;
 }
 
-interface geminimsg {
-  content : string;
-}
 
 const ConversationPage = () => {
   const router = useRouter();

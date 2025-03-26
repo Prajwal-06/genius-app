@@ -56,10 +56,6 @@ import { Providers } from "@/components/Providers";
 import localFont from "next/font/local";
 import {
   ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
 } from "@clerk/nextjs";
 import "./globals.css";
 

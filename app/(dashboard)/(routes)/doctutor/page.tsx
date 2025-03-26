@@ -11,11 +11,7 @@ import { chats } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 export default async function Home() {
-  try {
-    
-  } catch (error) {
-    
-  }
+
   const { userId } = await auth();
   const isAuth = !!userId;
   let firstChat;

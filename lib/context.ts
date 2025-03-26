@@ -1,7 +1,6 @@
 import { Pinecone } from "@pinecone-database/pinecone";
 import { convertToAscii } from "./utils";
 import { getEmbeddings } from "./embeddings";
-import { match } from "node:assert";
 
 export async function getMatchesFromEmbeddings(
   embeddings: number[],
@@ -33,7 +32,7 @@ export async function getContext(query: string, fileKey: string) {
 
 
   const qualifyingDocs = matches.filter(
-    (match) => match.score && match.score > 0.6
+    (match) => match.score && match.score > 0.1
     
   );
   
@@ -44,7 +43,7 @@ export async function getContext(query: string, fileKey: string) {
     pageNumber: number;
   };
 
-  let docs = qualifyingDocs.map((match) => (match.metadata as Metadata).text);
+  const docs = qualifyingDocs.map((match) => (match.metadata as Metadata).text);
   // 5 vectors
   return docs.join("\n").substring(0, 3000);
 }

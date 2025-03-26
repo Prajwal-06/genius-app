@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import * as z from "zod";
 import React, { useState } from "react";
 import Heading from "@/components/Heading";
@@ -11,11 +10,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/Loader";
-import Dropdown from "react-bootstrap/Dropdown";
-import ReactMarkdown from "react-markdown";
+
+
 
 interface Message {
   role: string;
@@ -23,9 +21,8 @@ interface Message {
 }
 
 const ImageGenerationPage = () => {
-  const router = useRouter();
+
   const [messages, setMessages] = useState<Message[]>([]);
-  const [selectedModel, setSelectedModel] = useState("DALL-E"); 
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

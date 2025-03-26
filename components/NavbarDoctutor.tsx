@@ -1,5 +1,4 @@
 import React from 'react'
-import MobileSidebar from './MobileSidebarDoctutor'
 import { UserButton } from '@clerk/nextjs'
 import MobileSidebarDoctutor from './MobileSidebarDoctutor'
 

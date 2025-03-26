@@ -98,7 +98,7 @@
 // }
 
 
-import { Pinecone, PineconeRecord } from "@pinecone-database/pinecone";
+import { Pinecone } from "@pinecone-database/pinecone";
 import { downloadFromS3 } from "./s3-server";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 
@@ -109,7 +109,7 @@ import {
 } from "@pinecone-database/doc-splitter";
 import { getEmbeddings } from "./embeddings";
 import { convertToAscii } from "./utils";
-import { FileKey } from "lucide-react";
+
 
 export const getPineconeClient = () => {
   return new Pinecone({
