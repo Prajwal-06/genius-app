@@ -4,16 +4,25 @@ import { useMutation } from "@tanstack/react-query";
 import { Inbox, Loader2 } from "lucide-react";
 import React from "react";
 import { useDropzone } from "react-dropzone";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+
+type UploadData = {
+  file_key: string;
+  file_name: string;
+};
+
+type ApiErrorResponse = {
+  error?: string;
+};
 
 const FileUpload = () => {
   const router = useRouter();
   const [uploading, setUploading] = React.useState(false);
   
   const { mutate, isPending } = useMutation({
-    mutationFn: async (uploadData: { file_key: string; file_name: string }) => {
+    mutationFn: async (uploadData: UploadData) => {
       const response = await axios.post("/api/create-chat", uploadData);
       return response.data;
     },
@@ -21,8 +30,16 @@ const FileUpload = () => {
       toast.success("Chat created!");
       router.push(`/doctutor/${data.chat_id}`);
     },
-    onError: (error: any) => {
-      toast.error(error.response?.data?.error || "Failed to create chat");
+    onError: (error: unknown) => {
+      let errorMessage = "Failed to create chat";
+      
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.error || error.message;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      
+      toast.error(errorMessage);
       console.error("Mutation error:", error);
     }
   });
@@ -49,10 +66,9 @@ const FileUpload = () => {
 
         mutate(data);
       } catch (error) {
-        console.error("Upload error:", error);
-        toast.error(
-          error instanceof Error ? error.message : "File upload failed"
-        );
+        const message = error instanceof Error ? error.message : "File upload failed";
+        console.error("Upload error:", message);
+        toast.error(message);
       } finally {
         setUploading(false);
       }

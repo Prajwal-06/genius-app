@@ -228,7 +228,6 @@
 "use client";
 import ChatLoader from "@/components/ChatLoader";
 import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ChatSideBar from "@/components/chat/ChatSideBar";
 import ChatComponent from "@/components/chat/ChatComponent";

@@ -3,7 +3,7 @@ import axios from "axios"
 import * as z from "zod"
 import React, { useState } from 'react'
 import Heading from '@/components/Heading';
-import { Code, Divide, MessageSquare } from 'lucide-react';
+import { Code } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -59,7 +59,7 @@ const CodePage = () => {
         form.reset();
 
 
-      }catch(error: any){
+      }catch(error){
 
         //TODO: Open pro model
         console.log(error);
@@ -151,7 +151,7 @@ const CodePage = () => {
                      
 
                     <ReactMarkdown components={{
-                      pre: ({node, ...props}) =>(
+                      pre: ({...props}) =>(
                         <div className="overflow-auto w-full my-2 bg-black text-white p-2 rounded-lg relative">
                           {/* <button
                             className="absolute top-2 right-2 text-sm bg-gray-200 text-black px-2 py-1 rounded"
@@ -162,7 +162,7 @@ const CodePage = () => {
                           <pre {...props}/>
                         </div>
                       ),
-                      code: ({node , ...props}) =>(
+                      code: ({...props}) =>(
                         <code className="bg-black text-white rounded-lg p-0.5" {...props}/>
                       )
                     }} className="bg-black/10 p-3 rounded-lg" >
