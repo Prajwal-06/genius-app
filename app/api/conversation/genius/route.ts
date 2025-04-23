@@ -44,20 +44,20 @@ export async function POST(
             messages: [instructionMessage , ...messages],
             model: 'deepseek-r1',
           });
-        const context_1 = response_1.choices[0].message
-        console.log(context_1)
+        const context_2 = response_1.choices[0].message
+        console.log(context_2)
         const response_2 = await client.chat.completions.create({
             messages: [instructionMessage , ...messages],
             model: 'gpt-4o',
           });
-        const context_2 = response_2.choices[0].message
-        console.log(context_2)
+        const context_3 = response_2.choices[0].message
+        console.log(context_3)
 
           const prompt = {
             role: "system" as const,
             content: `AI assistant is a brand new, powerful, human-like artificial intelligence.
             START CONTEXT BLOCK
-            ${context_1} & ${context_2}
+            ${context_2} & ${context_3}
             END OF CONTEXT BLOCK
             AI assistant will take into account two CONTEXT BLOCK that is provided.Response should be well sructured and clear for beginner `
           };
