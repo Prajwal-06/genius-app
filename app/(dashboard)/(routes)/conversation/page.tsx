@@ -264,6 +264,7 @@ const ConversationPage = () => {
                   <option value="OpenAI">OpenAI</option>
                   <option value="GeminiAI">GeminiAI</option>
                   <option value="deepseek-r1">Deepseek-R1</option>
+                  <option value="deepseek-v3">Deepseek-v3</option>
                   <option value="Meta-Llama-3.3-70B-Instruct-Turbo">Meta Llama-3.3 Turbo</option>
                   <option value="genius">Genius</option>
                 </select>
