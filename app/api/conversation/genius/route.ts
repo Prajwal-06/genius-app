@@ -59,7 +59,7 @@ export async function POST(
             START CONTEXT BLOCK
             ${context_1} & ${context_2}
             END OF CONTEXT BLOCK
-            AI assistant will take into account two CONTEXT BLOCK that is provided.Response should be well sructured and clear for beginner`
+            AI assistant will take into account two CONTEXT BLOCK that is provided.Response should be well sructured and clear for beginner `
           };
 
           const response = await client.chat.completions.create({
