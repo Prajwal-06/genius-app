@@ -200,6 +200,10 @@ const ConversationPage = () => {
           console.log(selectedModel)
           endpoint = "/api/conversation/Meta-Llama-3.3-70B-Instruct-Turbo"
         } 
+        else if(selectedModel === "genius"){
+          console.log(selectedModel)
+          endpoint = "/api/conversation/genius"
+        } 
     
 
       const response = await axios.post(endpoint, {messages: newMessages});
@@ -261,6 +265,7 @@ const ConversationPage = () => {
                   <option value="GeminiAI">GeminiAI</option>
                   <option value="deepseek-r1">Deepseek-R1</option>
                   <option value="Meta-Llama-3.3-70B-Instruct-Turbo">Meta Llama-3.3 Turbo</option>
+                  <option value="genius">Genius</option>
                 </select>
               </div>
               <Button

@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_API_KEY!);
 interface final_result {
     role:string,
