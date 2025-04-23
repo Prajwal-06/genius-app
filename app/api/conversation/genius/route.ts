@@ -50,7 +50,7 @@ export async function POST(
             messages: [instructionMessage , ...messages],
             model: 'gpt-4o',
           });
-        const context_2 = response_1.choices[0].message
+        const context_2 = response_2.choices[0].message
         console.log(context_2)
 
           const prompt = {
@@ -59,7 +59,7 @@ export async function POST(
             START CONTEXT BLOCK
             ${context_1} & ${context_2}
             END OF CONTEXT BLOCK
-            AI assistant will take into account two CONTEXT BLOCK that is provided.Response should be well sructured and clear and in depth for beginner`
+            AI assistant will take into account two CONTEXT BLOCK that is provided.Response should be well sructured and clear for beginner`
           };
 
           const response = await client.chat.completions.create({
