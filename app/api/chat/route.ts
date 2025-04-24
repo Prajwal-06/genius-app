@@ -52,7 +52,7 @@ export async function POST(req: Request) {
         ...messages.filter((message: { role: string }) => message.role === "user"),
       ],
     });
-    
+    console.log("response:",response.choices[0])
     const aiResponse = response.choices[0]?.message?.content || "I don't know the answer to that question.";
     
 

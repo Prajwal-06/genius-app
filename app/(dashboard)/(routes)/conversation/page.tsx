@@ -303,12 +303,12 @@ const ConversationPage = () => {
                 <ReactMarkdown components={{
                         pre: ({...props}) =>(
                           <div className="overflow-auto w-full my-2 bg-black text-white p-2 rounded-lg relative">
-                            {/* <button
+                            {/* { <button
                               className="absolute top-2 right-2 text-sm bg-gray-200 text-black px-2 py-1 rounded"
                               onClick={() => copyToClipboard(response.content)}
                               >
                               {copied}
-                          </button> */}
+                          </button> } */}
                             <pre {...props}/>
                           </div>
                         ),

@@ -3,7 +3,7 @@ import axios from "axios"
 import * as z from "zod"
 import React, { useState } from 'react'
 import Heading from '@/components/Heading';
-import { Code } from 'lucide-react';
+import { Code , Play } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/Loader";
 import ReactMarkdown from "react-markdown";
+import { toast } from "sonner";
 
 
 interface Message {
@@ -25,6 +26,7 @@ const CodePage = () => {
     
     const router = useRouter();
     const [messages , setMessages] = useState<Message[]>([]);
+    const [copiedResponses, setCopiedResponses] = useState<Record<number, boolean>>({});
     const [selectedModel, setSelectedModel] = useState("OpenAI");
     const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
@@ -34,6 +36,19 @@ const CodePage = () => {
     });
 
     const isLoading = form.formState.isSubmitting;
+
+    const copyToClipboard = async (text: string, responseIndex: number) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        toast.success("Copied to clipboard!");
+        setCopiedResponses(prev => ({ ...prev, [responseIndex]: true }));
+        setTimeout(() => {
+          setCopiedResponses(prev => ({ ...prev, [responseIndex]: false }));
+        }, 10000);
+      } catch (err) {
+        toast.error("Failed to copy to clipboard");
+      }
+    };
 
     const onSubmit = async (values: z.infer<typeof formSchema>) =>{
       try{
@@ -136,53 +151,58 @@ const CodePage = () => {
             }
           <div className="flex flex-col-reverse gap-y-4">
             {messages.reduce((acc: JSX.Element[], message, index) => {
-   
-            if (index % 2 === 0) {
-              const response = messages[index + 1];
-              acc.push(
-                <div key={message.content} className="space-y-1">
-                  <div className="inline-block bg-slate-100 px-2 py-1 rounded-full">
-                    {message.content}
-                  </div>
-                  {response && (
-
-                    
-                        
-                     
-
-                    <ReactMarkdown components={{
-                      pre: ({...props}) =>(
-                        <div className="overflow-auto w-full my-2 bg-black text-white p-2 rounded-lg relative">
-                          {/* <button
-                            className="absolute top-2 right-2 text-sm bg-gray-200 text-black px-2 py-1 rounded"
-                            onClick={() => copyToClipboard(response.content)}
-                            >
-                            {copied}
-                        </button> */}
-                          <pre {...props}/>
-                        </div>
-                      ),
-                      code: ({...props}) =>(
-                        <code className="bg-black text-white rounded-lg p-0.5" {...props}/>
-                      )
-                    }} className="bg-black/10 p-3 rounded-lg" >
-                      {
-                        response.content || ""
-                      }
-                    </ReactMarkdown>
-                    
-                  )
-                  }
-        </div>
-      );
-    }
-    return acc;
-  }, [])}
-</div>
-
-          </div>
+                if (index % 2 === 0) {
+                const response = messages[index + 1];
+                acc.push(
+                    <div key={index} className="space-y-1">
+                    <div className="inline-block bg-slate-100 px-2 py-1 rounded-full">
+                        {message.content}
+                    </div>
+                    {response && (
+                        <ReactMarkdown
+                        components={{
+                            pre: ({ ...props }) => (
+                            <div className="overflow-auto w-full my-2 bg-black text-white p-2 rounded-lg relative">
+                                <div className="absolute top-2 right-2 flex gap-2">
+                                <button
+                                    onClick={() => copyToClipboard(response.content, index + 1)}
+                                    className="text-sm bg-gray-200 text-black px-2 py-1 rounded"
+                                >
+                                    {copiedResponses[index + 1] ? "Copied!" : "Copy"}
+                                </button>
+                                <button
+                                    onClick={() => window.open(
+                                    "https://www.programiz.com/python-programming/online-compiler/", 
+                                    "_blank"
+                                    )}
+                                    className="text-sm bg-gray-200 text-black px-2 py-1 rounded flex items-center"
+                                >
+                                    <Play className="w-4 h-4 mr-1" />
+                                    Run
+                                </button>
+                                </div>
+                                <pre {...props} />
+                            </div>
+                            ),
+                            code: ({ ...props }) => (
+                            <code className="bg-black text-white rounded-lg p-0.5" {...props} />
+                            )
+                        }}
+                        className="bg-black/10 p-3 rounded-lg"
+                        >
+                        {response.content || ""}
+                        </ReactMarkdown>
+                    )}
+                    </div>
+                );
+                }
+                return acc;
+            }, [])}
         </div>
     </div>
+    </div>
+    </div>
+    
   )
 }
 
