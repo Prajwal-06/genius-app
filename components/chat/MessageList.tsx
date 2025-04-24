@@ -41,7 +41,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
-                code({ node, className, children, ...props }) {
+                code({ children, ...props }) {
                   const isUser = message.role === "user";
                   return (
                     <code
@@ -55,7 +55,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
                     </code>
                   );
                 },
-                pre({ node, className, children, ...props }) {
+                pre({ children, ...props }) {
                   const isUser = message.role === "user";
                   return (
                     <pre

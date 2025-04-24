@@ -47,6 +47,7 @@ const CodePage = () => {
         }, 10000);
       } catch (err) {
         toast.error("Failed to copy to clipboard");
+        console.log(err)
       }
     };
 
