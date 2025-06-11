@@ -40,7 +40,7 @@ export async function POST(
 
         const response = await client.chat.completions.create({
             messages: [instructionMessage , ...messages],
-            model: 'deepseek-r1',
+            model: 'provider-3/deepseek-r1-0528',
           });
 
           return NextResponse.json(response.choices[0].message)

@@ -42,13 +42,13 @@ export async function POST(
 
         const response_1 = await client.chat.completions.create({
             messages: [instructionMessage , ...messages],
-            model: 'deepseek-r1',
+            model: 'provider-3/deepseek-v3-0324',
           });
         const context_2 = response_1.choices[0].message
         console.log(context_2)
         const response_2 = await client.chat.completions.create({
             messages: [instructionMessage , ...messages],
-            model: 'gpt-4o',
+            model: 'provider-3/gpt-4o',
           });
         const context_3 = response_2.choices[0].message
         console.log(context_3)
@@ -63,7 +63,7 @@ export async function POST(
           };
 
           const response = await client.chat.completions.create({
-            model: "gpt-4o",
+            model: "provider-3/gpt-4o",
             stream: false,
             messages: [
               prompt,

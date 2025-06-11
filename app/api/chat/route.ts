@@ -45,7 +45,7 @@ export async function POST(req: Request) {
 
     // Get complete response
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "provider-3/gpt-4o",
       stream: false, // Disable streaming
       messages: [
         prompt,

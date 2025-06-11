@@ -7,6 +7,15 @@ const client = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY'], 
 });
 
+interface instruction{
+    role: string,
+    content: string,
+} 
+
+const instructionMessage: instruction ={
+    role: "system",
+    content: "you are AI only personalize for conversation purpose. make it moderate and straight forward "
+} 
 
 
 export async function POST(
@@ -30,8 +39,8 @@ export async function POST(
         }
 
         const response = await client.chat.completions.create({
-            messages: [...messages],
-            model: 'gpt-4o',
+            messages: [instructionMessage ,...messages],
+            model: 'provider-3/gpt-4o',
           });
 
           return NextResponse.json(response.choices[0].message)

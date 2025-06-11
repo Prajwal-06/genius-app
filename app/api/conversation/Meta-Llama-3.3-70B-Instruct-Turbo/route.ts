@@ -32,7 +32,7 @@ export async function POST(
 
         const response = await client.chat.completions.create({
             messages: [...messages],
-            model: 'Meta-Llama-3.3-70B-Instruct-Turbo',
+            model: 'provider-4/llama-3.3-70b',
           });
 
           return NextResponse.json(response.choices[0].message)
